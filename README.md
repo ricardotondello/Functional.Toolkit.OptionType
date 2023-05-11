@@ -1,5 +1,7 @@
 # Functional.Toolkit.OptionType
 
+[![Build](https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml)
+
 A Functional Option Type that comes handy working and chaining tasks.
 
 _Here its just a few examples, check all the available extensions in the OptionExtensions.cs file_
