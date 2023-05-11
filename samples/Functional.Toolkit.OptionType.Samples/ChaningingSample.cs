@@ -1,18 +1,6 @@
-# Functional.Toolkit.OptionType
+﻿using Functional.Toolkit.OptionType;
 
-A Functional Option Type that comes handy working and chaining tasks.
-
-_Here its just a few examples, check all the available extensions in the OptionExtensions.cs file_
-
-
-```csharp
-//Object Initialization
-
-var option1 = Option.From((ClassForTest)null); //will automatically determine if its None or Some based on the generic type
-var option2 = Option.From(new ClassForTest());
-var option3 = Option.None<ClassForTest>();
-var option4 = Option.Some(new ClassForTest());
-...
+var rnd = new Random();
 
 //Sync
 var maybeClass = await MaybeGetClass();
@@ -56,4 +44,37 @@ var result = await maybeClassTask
     {
         Console.WriteLine($"Does my object has a value? {maybeValue.HasValue}");
     });
-```
+
+
+#region Methods
+
+//Randomly creates ar not the object purposely
+Task<Option<MyClass>> MaybeGetClass()
+{
+    
+    if (rnd.Next(2) == 1)
+    {
+        Task.FromResult(Option.None<MyClass>());
+    }
+    return Task.FromResult(Option.From(MyClass.CreateNew("test")));
+}
+#endregion
+
+
+#region FakeClass
+
+public class MyClass
+{
+    public Guid Id { get; }
+    public string Name { get; }
+
+    private MyClass(Guid id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
+
+    public static MyClass CreateNew(string name) => new(Guid.NewGuid(), name);
+}
+
+#endregion
