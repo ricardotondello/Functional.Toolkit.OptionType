@@ -1,11 +1,14 @@
-# Functional.Toolkit.OptionType
+# 🚀 Functional.Toolkit.OptionType
 
 [![Build](https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml)
 
-A Functional Option Type that comes handy working and chaining tasks.
+Functional.Toolkit.OptionType is a lightweight library that provides an implementation of the Option type in C#.
+The Option type is a functional programming concept that represents a value that may or may not be present. 
+This can help reduce the number of null checks in your code, making it more robust and easier to reason about.
 
-_Here its just a few examples, check all the available extensions in the OptionExtensions.cs file_
+_Here its just a few examples, check all the available extensions in the [OptionExtensions.cs](https://github.com/ricardotondello/Functional.Toolkit.OptionType/blob/main/src/Functional.Toolkit.OptionType/OptionExtensions.cs) file_
 
+## Usage
 
 ```csharp
 //Object Initialization
@@ -59,3 +62,13 @@ var result = await maybeClassTask
         Console.WriteLine($"Does my object has a value? {maybeValue.HasValue}");
     });
 ```
+
+## Contributing
+
+Contributions are welcome! If you find a bug or have a feature request, please open an issue on GitHub.
+If you would like to contribute code, please fork the repository and submit a pull request.
+
+## License
+
+Functional.Toolkit.OptionType is licensed under the MIT License. 
+See [LICENSE](https://github.com/ricardotondello/Functional.Toolkit.OptionType/blob/main/LICENSE) for more information.

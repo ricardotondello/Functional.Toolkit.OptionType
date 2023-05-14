@@ -10,7 +10,13 @@ public static class OptionExtensions
     /// <returns>value(:TX) or null</returns>
     public static TX? ValueOrNull<TX>(this Option<TX> option) where TX : struct =>
         option.HasValue ? option.Value : null;
+    
+    public static TX? ValueOrDefault<TX>(this Option<TX> option) where TX : struct =>
+        option.HasValue ? option.Value : default;
 
+    public static TX? ValueOr<TX>(this Option<TX> option, TX fallback) where TX : struct =>
+        option.HasValue ? option.Value : fallback;
+    
     #region WhenXX
 
     /*
@@ -168,7 +174,9 @@ public static class OptionExtensions
     }
 
     #endregion
-    
+
+    #region Maping
+
     /// <summary>
     /// Map operation, applies the value from the option to a function (TX => TY) and returns the result as Option TY
     /// </summary>
@@ -177,8 +185,8 @@ public static class OptionExtensions
     /// <param name="option">this parameter of Option type</param>
     /// <param name="fn">TX => TY</param>
     /// <returns>Option TY</returns>
-    public static Option<TY> Map<TX, TY>(this Option<TX> option, Func<TX, TY> fn)
-        => option.HasValue ? Option.From(fn(option.Value)) : Option.None<TY>();
+    public static Option<TY> Map<TX, TY>(this Option<TX> option, Func<TX, TY> fn) =>
+        option.HasValue ? Option.From(fn(option.Value)) : Option.None<TY>();
 
     /// <summary>
     /// Map operation, applies the value from the async option to a function (TX => TY) and returns the result as Option TY
@@ -193,4 +201,6 @@ public static class OptionExtensions
         var option = await optionTask;
         return option.HasValue ? Option.From(fn(option.Value)) : Option.None<TY>();
     }
+
+    #endregion
 }
