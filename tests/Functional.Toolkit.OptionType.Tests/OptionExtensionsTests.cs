@@ -140,7 +140,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeTrue();
         placeHolder.Should().BeTrue();
     }
-    
+
     [Test]
     public void Should_ExecuteActionWhenAny_WhenIsNone()
     {
@@ -153,12 +153,13 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeFalse();
         placeHolder.Should().BeTrue();
     }
-    
+
     [Test]
     public async Task Should_ExecuteActionWhenSomeAsync_WhenHasValue()
     {
         var option = Task.FromResult(Option.Some(true));
         var placeHolder = false;
+
         Task Fn(bool value)
         {
             placeHolder = value;
@@ -176,27 +177,31 @@ public class OptionExtensionsTests
     {
         var option = Task.FromResult(Option.None<bool>());
         var placeHolder = false;
+
         Task Fn(bool value)
         {
             placeHolder = value;
             return Task.CompletedTask;
         }
+
         var result = await option.WhenSomeAsync(Fn);
-    
+
         placeHolder.Should().BeFalse();
         result.HasValue.Should().BeFalse();
     }
-    
+
     [Test]
     public async Task Should_NotExecuteActionWhenNoneAsync_WhenHasValue()
     {
         var option = Task.FromResult(Option.Some(true));
         var placeHolder = false;
+
         Task Fn()
         {
             placeHolder = true;
             return Task.CompletedTask;
         }
+
         var result = await option.WhenNoneAsync(Fn);
 
         placeHolder.Should().BeFalse();
@@ -208,13 +213,15 @@ public class OptionExtensionsTests
     {
         var option = Task.FromResult(Option.None<bool>());
         var placeHolder = false;
+
         Task Fn()
         {
             placeHolder = true;
             return Task.CompletedTask;
         }
+
         var result = await option.WhenNoneAsync(Fn);
-    
+
         placeHolder.Should().BeTrue();
         result.HasValue.Should().BeFalse();
     }
@@ -231,20 +238,20 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeTrue();
         placeHolder.Should().BeTrue();
     }
-    
+
     [Test]
     public async Task Should_ExecuteActionWhenAnyAsync_WhenIsNone()
     {
         var option = Task.FromResult(Option.None<bool>());
         var placeHolder = false;
         void Act(Option<bool> value) => placeHolder = true;
-    
+
         var result = await option.WhenAnyAsync(Act);
-    
+
         result.HasValue.Should().BeFalse();
         placeHolder.Should().BeTrue();
     }
-    
+
     [Test]
     public void OnSome_Should_Call_Function_If_Option_Has_Value()
     {
@@ -354,7 +361,7 @@ public class OptionExtensionsTests
         // Assert
         result.Should().BeEquivalentTo(Option.None<int>());
     }
-    
+
     [Test]
     public async Task OnNone_WhenOptionHasNoValue_ShouldReturnResultOfFunction()
     {
@@ -380,7 +387,7 @@ public class OptionExtensionsTests
         // Assert
         result.Should().BeEquivalentTo(option);
     }
-    
+
     [Test]
     public void OnAny_WhenOptionHasNoValue_ShouldReturnResultOfFunction()
     {
@@ -406,55 +413,55 @@ public class OptionExtensionsTests
         // Assert
         result.Should().BeEquivalentTo(Option.Some(2));
     }
-    
+
     [Test]
     public async Task OnSomeAsync_WhenOptionHasValue_ShouldReturnResultOfFunction()
     {
         // Arrange
         var option = Task.FromResult(Option.Some(1));
-    
+
         // Act
         var result = await option.OnSomeAsync(async opt => await Task.FromResult(opt + 1));
-    
+
         // Assert
         result.Should().BeEquivalentTo(Option.Some(2));
     }
-    
+
     [Test]
     public async Task OnSomeAsync_WhenOptionHasNoValue_ShouldReturnOptionNone()
     {
         // Arrange
         var option = Task.FromResult(Option.None<int>());
-    
+
         // Act
         var result = await option.OnSomeAsync(async opt => await Task.FromResult(opt + 1));
-    
+
         // Assert
         result.Should().BeEquivalentTo(Option.None<int>());
     }
-    
+
     [Test]
     public async Task OnNoneAsync_WhenOptionHasNoValue_ShouldReturnResultOfFunction()
     {
         // Arrange
         var option = Task.FromResult(Option.None<int>());
-    
+
         // Act
         var result = await option.OnNoneAsync(async () => await Task.FromResult(Option.Some(1)));
-    
+
         // Assert
         result.Should().BeEquivalentTo(Option.Some(1));
     }
-    
+
     [Test]
     public async Task OnNoneAsync_WhenOptionHasValue_ShouldReturnOptionNone()
     {
         // Arrange
         var option = Task.FromResult(Option.Some(1));
-    
+
         // Act
         var result = await option.OnNoneAsync(async () => await Task.FromResult(Option.Some(2)));
-    
+
         // Assert
         result.Should().BeEquivalentTo(Option.Some(1));
     }
@@ -484,7 +491,7 @@ public class OptionExtensionsTests
         // Assert
         result.Should().BeEquivalentTo(Option.Some(1));
     }
-    
+
     [Test]
     public async Task MapAsync_WhenOptionHasValue_ShouldReturnResultOfFunction()
     {
@@ -510,56 +517,108 @@ public class OptionExtensionsTests
         // Assert
         result.Should().BeEquivalentTo(Option.None<int>());
     }
-    
-     [Test]
+
+    [Test]
     public async Task OnSomeAsyncTask_WhenOptionHasValue_ShouldReturnResultOfFunction()
     {
         // Arrange
         var option = Task.FromResult(Option.Some(1));
-    
+
         // Act
         var result = await option.OnSomeAsync(x => Option.Some(x + 1));
-    
+
         // Assert
         result.Should().BeEquivalentTo(Option.Some(2));
     }
-    
+
     [Test]
     public async Task OnSomeAsyncTask_WhenOptionHasNoValue_ShouldReturnOptionNone()
     {
         // Arrange
         var option = Task.FromResult(Option.None<int>());
-    
+
         // Act
         var result = await option.OnSomeAsync(x => Option.Some(x + 1));
-    
+
         // Assert
         result.Should().BeEquivalentTo(Option.None<int>());
     }
-    
+
     [Test]
     public async Task OnNoneAsyncTask_WhenOptionHasNoValue_ShouldReturnResultOfFunction()
     {
         // Arrange
         var option = Task.FromResult(Option.None<int>());
-    
+
         // Act
         var result = await option.OnNoneAsync(() => Option.Some(1));
-    
+
         // Assert
         result.Should().BeEquivalentTo(Option.Some(1));
     }
-    
+
     [Test]
     public async Task OnNoneAsyncTask_WhenOptionHasValue_ShouldReturnOptionNone()
     {
         // Arrange
         var option = Task.FromResult(Option.Some(1));
-    
+
         // Act
         var result = await option.OnNoneAsync(() => Option.Some(2));
-    
+
         // Assert
         result.Should().BeEquivalentTo(Option.Some(1));
+    }
+
+    [Test]
+    public void ValueOrDefault_Returns_Value_When_HasValue_True()
+    {
+        // Arrange
+        var option = Option.Some(42);
+
+        // Act
+        var result = option.ValueOrDefault();
+
+        // Assert
+        result.Should().Be(42);
+    }
+
+    [Test]
+    public void ValueOrDefault_Returns_Default_When_HasValue_False()
+    {
+        // Arrange
+        var option = Option.None<int>();
+
+        // Act
+        var result = option.ValueOrDefault();
+
+        // Assert
+        result.Should().Be(default(int));
+    }
+
+    [Test]
+    public void ValueOr_Returns_Value_When_HasValue_True()
+    {
+        // Arrange
+        var option = Option.Some(42);
+
+        // Act
+        var result = option.ValueOr(0);
+
+        // Assert
+        result.Should().Be(42);
+    }
+
+    [Test]
+    public void ValueOr_Returns_Fallback_When_HasValue_False()
+    {
+        // Arrange
+        var option = Option.None<int>();
+
+        // Act
+        var result = option.ValueOr(0);
+
+        // Assert
+        result.Should().Be(0);
     }
 }
