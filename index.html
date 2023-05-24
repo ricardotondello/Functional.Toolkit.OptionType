@@ -1,0 +1,66 @@
+<h1 id="-functional-toolkit-optiontype">🚀 Functional.Toolkit.OptionType</h1>
+<p><a href="https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml"><img src="https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml/badge.svg?branch=main" alt="Build"></a></p>
+<p>Functional.Toolkit.OptionType is a lightweight library that provides an implementation of the Option type in C#.
+The Option type is a functional programming concept that represents a value that may or may not be present. 
+This can help reduce the number of null checks in your code, making it more robust and easier to reason about.</p>
+<p><em>Here its just a few examples, check all the available extensions in the <a href="https://github.com/ricardotondello/Functional.Toolkit.OptionType/blob/main/src/Functional.Toolkit.OptionType/OptionExtensions.cs">OptionExtensions.cs</a> file</em></p>
+<h2 id="usage">Usage</h2>
+<pre><code class="lang-csharp"><span class="hljs-comment">//Object Initialization</span>
+
+<span class="hljs-keyword">var</span> option1 = Option.From((ClassForTest)<span class="hljs-literal">null</span>); <span class="hljs-comment">//will automatically determine if its None or Some based on the generic type</span>
+<span class="hljs-keyword">var</span> option2 = Option.From(<span class="hljs-keyword">new</span> ClassForTest());
+<span class="hljs-keyword">var</span> option3 = Option.None&lt;ClassForTest&gt;();
+<span class="hljs-keyword">var</span> option4 = Option.Some(<span class="hljs-keyword">new</span> ClassForTest());
+...
+
+<span class="hljs-comment">//Sync</span>
+<span class="hljs-keyword">var</span> maybeClass = <span class="hljs-keyword">await</span> MaybeGetClass();
+
+maybeClass
+    .WhenSome(<span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span>
+    {
+        Console.WriteLine($<span class="hljs-string">"Proceed doing something with the value: {value.Name}"</span>);
+        <span class="hljs-comment">//It could be whatever you want, here you have the value of the type of the Option</span>
+        <span class="hljs-comment">//Example:</span>
+        <span class="hljs-comment">//Call another methods, write in the DB, Publish to a Service Bus, infinity...</span>
+    })
+    .WhenNone(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"Proceed as a fallback without the value"</span>);
+        <span class="hljs-comment">//since the Option is None the value couldn't be found.</span>
+        <span class="hljs-comment">//Example:</span>
+        <span class="hljs-comment">//Write logs, alerts, whatever.</span>
+    })
+    .WhenAny(<span class="hljs-function"><span class="hljs-params">maybeValue</span> =&gt;</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"Despite having a value or not this will be execute and you can decide what to do."</span>);
+        Console.WriteLine($<span class="hljs-string">"Does my object has a value? {maybeValue.HasValue}"</span>);
+    });
+
+
+<span class="hljs-comment">//Async</span>
+<span class="hljs-keyword">var</span> maybeClassTask = MaybeGetClass();
+
+<span class="hljs-keyword">var</span> result = <span class="hljs-keyword">await</span> maybeClassTask
+    .WhenSomeAsync(<span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> 
+    { 
+        Console.WriteLine($<span class="hljs-string">"Proceed doing something with the value: {value.Name}"</span>);
+        <span class="hljs-keyword">return</span> Task.CompletedTask;
+    })
+    .WhenNoneAsync(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"Proceed as a fallback without the value"</span>);
+        <span class="hljs-keyword">return</span> Task.CompletedTask;
+    }).WhenAnyAsync(<span class="hljs-function"><span class="hljs-params">maybeValue</span> =&gt;</span>
+    {
+        Console.WriteLine($<span class="hljs-string">"Does my object has a value? {maybeValue.HasValue}"</span>);
+    });
+</code></pre>
+<h2 id="unitests">Test Coverage</h2>
+See <a href="https://ricardotondello.github.io/Functional.Toolkit.OptionType/unittests/">Unit Tests Coverage</a> here.</p>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are welcome! If you find a bug or have a feature request, please open an issue on GitHub.
+If you would like to contribute code, please fork the repository and submit a pull request.</p>
+<h2 id="license">License</h2>
+<p>Functional.Toolkit.OptionType is licensed under the MIT License. 
+See <a href="https://github.com/ricardotondello/Functional.Toolkit.OptionType/blob/main/LICENSE">LICENSE</a> for more information.</p>
