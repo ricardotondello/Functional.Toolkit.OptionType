@@ -11,7 +11,7 @@ public class OptionTests
     {
         // Act
         var option1 = Option.From((ClassForTest)null);
-        Func<ClassForTest> value1 = () => option1.Value;
+        var value1 = () => option1.Value;
 
         var option2 = Option.From((StructForTest?)null);
         Func<StructForTest?> value2 = () => option2.Value;
