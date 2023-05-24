@@ -222,7 +222,7 @@ var assemblies = [
     "name": "Functional.Toolkit.OptionType",
     "classes": [
       { "name": "Functional.Toolkit.OptionType.Option", "rp": "Functional.Toolkit.OptionType_Option.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 31, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Functional.Toolkit.OptionType.Option<T>", "rp": "Functional.Toolkit.OptionType_Option_1.html", "cl": 31, "ucl": 0, "cal": 31, "tl": 67, "cb": 17, "tb": 20, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Functional.Toolkit.OptionType.Option<T>", "rp": "Functional.Toolkit.OptionType_Option_1.html", "cl": 31, "ucl": 0, "cal": 31, "tl": 66, "cb": 17, "tb": 20, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "Functional.Toolkit.OptionType.OptionExtensions", "rp": "Functional.Toolkit.OptionType_OptionExtensions.html", "cl": 88, "ucl": 0, "cal": 88, "tl": 206, "cb": 38, "tb": 38, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
 ];
