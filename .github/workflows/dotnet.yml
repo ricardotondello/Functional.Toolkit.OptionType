@@ -63,5 +63,5 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: coveragereport
-        destination_dir: unitests
+        destination_dir: unittests
         publish_branch: gh-pages
