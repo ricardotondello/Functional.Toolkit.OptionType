@@ -10,8 +10,10 @@
         <RepositoryUrl>https://github.com/ricardotondello/Functional.Toolkit.OptionType</RepositoryUrl>
         <Title>Functional.Toolkit.OptionType</Title>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\..\LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
     </ItemGroup>
 </Project>
