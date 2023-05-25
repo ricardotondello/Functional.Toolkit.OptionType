@@ -2,36 +2,35 @@
 
 public readonly struct Option<T> : IEquatable<Option<T>>
 {
-    private static readonly Option<T> _none = new(default, false);
+    private static readonly Option<T> Default = new(default, false);
 
     private readonly T _value;
-    private readonly bool _hasValue;
 
     public T Value
     {
         get
         {
-            if (!HasValue) throw new InvalidOperationException();
+            if (!HasValue)
+            {
+                throw new InvalidOperationException();
+            }
 
             return _value;
         }
     }
 
-    public bool HasValue => _hasValue;
+    public bool HasValue { get; }
 
-    public bool IsNone => !_hasValue;
+    public bool IsNone => !HasValue;
 
-    internal static Option<T> Some(T instance) => new(instance, true);
+    internal static Option<T> Some(T value) => new(value, true);
 
-    internal static Option<T> None() => _none;
-
-
+    internal static Option<T> None() => Default;
+    
     public static implicit operator Option<T>(T value) => Option.From(value);
 
-    public bool Equals(Option<T> other)
-    {
-        return !HasValue && !other.HasValue || HasValue && other.HasValue && Value.Equals(other.Value);
-    }
+    public bool Equals(Option<T> other) =>
+        !HasValue && !other.HasValue || HasValue && other.HasValue && Value.Equals(other.Value);
 
     public static bool operator ==(Option<T> a, Option<T> b) => a.Equals(b);
 
@@ -47,7 +46,7 @@ public readonly struct Option<T> : IEquatable<Option<T>>
     {
         unchecked
         {
-            return (_value.GetHashCode() * 397) ^ _hasValue.GetHashCode();
+            return (_value.GetHashCode() * 397) ^ HasValue.GetHashCode();
         }
     }
 
@@ -62,6 +61,6 @@ public readonly struct Option<T> : IEquatable<Option<T>>
         }
 
         _value = value;
-        _hasValue = hasValue;
+        HasValue = hasValue;
     }
 }
