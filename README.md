@@ -1,6 +1,10 @@
 # 🚀 Functional.Toolkit.OptionType
 
 [![Build](https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml)
+[![Code Coverage](https://img.shields.io/badge/Code%20Coverage-100%25-success?style=flat)](https://ricardotondello.github.io/Functional.Toolkit.OptionType/unittests)
+[![NuGet latest version](https://badgen.net/nuget/v/Functional.Toolkit.OptionType/latest)](https://nuget.org/packages/Functional.Toolkit.OptionType)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Functional.Toolkit.OptionType)](https://www.nuget.org/packages/Functional.Toolkit.OptionType)
+
 
 Functional.Toolkit.OptionType is a lightweight library that provides an implementation of the Option type in C#.
 The Option type is a functional programming concept that represents a value that may or may not be present. 
