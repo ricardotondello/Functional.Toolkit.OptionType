@@ -1,6 +1,6 @@
 ﻿namespace Functional.Toolkit.OptionType.Tests;
 
-public struct StructForTest
+public struct OptionTestStruct
 {
     public string Name { get; set; }
 }

@@ -7,7 +7,7 @@ public class OptionExtensionsTests
     [Test]
     public void Should_ReturnValue_WhenValueExists()
     {
-        var option = Option.Some(new StructForTest());
+        var option = Option.Some(new OptionTestStruct());
         var result = option.ValueOrNull();
         result.HasValue.Should().BeTrue();
         result.Should().NotBeNull();
@@ -16,7 +16,7 @@ public class OptionExtensionsTests
     [Test]
     public void Should_ReturnNull_WhenValueDoesntExists()
     {
-        var option = Option.None<StructForTest>();
+        var option = Option.None<OptionTestStruct>();
         var result = option.ValueOrNull();
         result.HasValue.Should().BeFalse();
         result.Should().BeNull();

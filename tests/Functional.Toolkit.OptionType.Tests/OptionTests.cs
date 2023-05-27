@@ -10,19 +10,19 @@ public class OptionTests
     public void Should_Return_OptionNone_If_Value_Is_Null()
     {
         // Act
-        var option1 = Option.From((ClassForTest)null);
+        var option1 = Option.From((OptionTestClass)null);
         var value1 = () => option1.Value;
 
-        var option2 = Option.From((StructForTest?)null);
-        Func<StructForTest?> value2 = () => option2.Value;
+        var option2 = Option.From((OptionTestStruct?)null);
+        Func<OptionTestStruct?> value2 = () => option2.Value;
 
         // Assert
         option1.HasValue.Should().BeFalse();
-        option1.Should().Be(Option.None<ClassForTest>());
+        option1.Should().Be(Option.None<OptionTestClass>());
         value1.Should().Throw<InvalidOperationException>();
 
         option2.HasValue.Should().BeFalse();
-        option2.Should().Be(Option.None<StructForTest>());
+        option2.Should().Be(Option.None<OptionTestStruct>());
         value2.Should().Throw<InvalidOperationException>();
     }
 
@@ -30,7 +30,7 @@ public class OptionTests
     public void Should_Throw_If_Assigned_Value_Is_Null()
     {
         // Act
-        Action act1 = () => Option.Some<ClassForTest>(null);
+        Action act1 = () => Option.Some<OptionTestClass>(null);
 
         // Assert
         act1.Should().Throw<ArgumentNullException>();
@@ -40,8 +40,8 @@ public class OptionTests
     public void Should_Return_OptionSome_If_Value_Is_Not_Null()
     {
         // Arrange
-        ClassForTest obj1 = new ClassForTest();
-        StructForTest obj2 = new StructForTest();
+        OptionTestClass obj1 = new OptionTestClass();
+        OptionTestStruct obj2 = new OptionTestStruct();
 
         // Act
         var option1 = Option.From(obj1);
@@ -105,16 +105,16 @@ public class OptionTests
     public void ToString_Should_Return_Correct_Result()
     {
         // Arrange
-        ClassForTest obj1 = new ClassForTest();
+        OptionTestClass obj1 = new OptionTestClass();
 
         // Act
         var option1 = Option.From(obj1);
-        var option2 = Option.From((ClassForTest)null);
+        var option2 = Option.From((OptionTestClass)null);
 
 
         // Assert
-        option1.ToString().Should().Be("Some<ClassForTest>(ClassForTest)");
-        option2.ToString().Should().Be("None<ClassForTest>");
+        option1.ToString().Should().Be("Some<OptionTestClass>(OptionTestClass)");
+        option2.ToString().Should().Be("None<OptionTestClass>");
     }
     
     [Test]

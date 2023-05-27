@@ -26,7 +26,7 @@ public readonly struct Option<T> : IEquatable<Option<T>>
     internal static Option<T> Some(T value) => new(value, true);
 
     internal static Option<T> None() => Default;
-    
+
     public static implicit operator Option<T>(T value) => Option.From(value);
 
     public bool Equals(Option<T> other) =>
