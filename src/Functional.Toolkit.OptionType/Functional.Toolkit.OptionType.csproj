@@ -12,9 +12,11 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Authors>Ricardo Tondello</Authors>
+        <PackageIcon>FTOT_icon.png</PackageIcon>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\..\LICENSE" Pack="true" PackagePath="LICENSE" />
+        <None Include="FTOT_icon.png" Pack="true" PackagePath=""/>
     </ItemGroup>
 </Project>
