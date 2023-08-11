@@ -8,7 +8,7 @@ var maybeClass = await MaybeGetClass();
 maybeClass
     .WhenSome(value =>
     {
-        Console.WriteLine($"Proceed doing something with the value: {value.Name}");
+        Console.WriteLine($"Proceed doing something with the value: {value.Id} {value.Name}");
         //It could be whatever you want, here you have the value of the type of the Option
         //Example:
         //Call another methods, write in the DB, Publish to a Service Bus, infinity...
@@ -45,6 +45,7 @@ var result = await maybeClassTask
         Console.WriteLine($"Does my object has a value? {maybeValue.HasValue}");
     });
 
+Console.WriteLine($"Result returned: {result.HasValue}");
 
 #region Methods
 
