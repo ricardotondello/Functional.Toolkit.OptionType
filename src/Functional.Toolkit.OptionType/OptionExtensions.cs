@@ -192,6 +192,7 @@ public static class OptionExtensions
     /// <param name="option">The Option instance.</param>
     /// <param name="fn">The function to be applied.</param>
     /// <returns>A new Option resulting from the function.</returns>
+    // ReSharper disable once UnusedParameter.Global
     public static Option<T> OnAny<T>(this Option<T> option, Func<Option<T>> fn) => fn();
 
     /// <summary>
@@ -282,6 +283,7 @@ public static class OptionExtensions
     /// <param name="optionTask">A task representing the Option instance.</param>
     /// <param name="fn">The asynchronous function to be applied.</param>
     /// <returns>A task representing the new Option resulting from the function.</returns>
+    // ReSharper disable once UnusedParameter.Global
     public static Task<Option<T>> OnAnyAsync<T>(this Task<Option<T>> optionTask, Func<Task<Option<T>>> fn) => fn();
 
     /// <summary>
