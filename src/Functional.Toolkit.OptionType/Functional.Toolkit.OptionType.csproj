@@ -9,13 +9,13 @@
         <Description>Functional.Toolkit.OptionType is a lightweight library that provides an implementation of the Option type in C#. The Option type is a functional programming concept that represents a value that may or may not be present. This can help reduce the number of null checks in your code, making it more robust and easier to reason about.</Description>
         <RepositoryUrl>https://github.com/ricardotondello/Functional.Toolkit.OptionType</RepositoryUrl>
         <Title>Functional.Toolkit.OptionType</Title>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageReadmeFile>NuGet.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Authors>Ricardo Tondello</Authors>
         <PackageIcon>FTOT_icon.png</PackageIcon>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\docs\NuGet.md" Pack="true" PackagePath="\" />
         <None Include="..\..\LICENSE" Pack="true" PackagePath="LICENSE" />
         <None Include="FTOT_icon.png" Pack="true" PackagePath=""/>
     </ItemGroup>
