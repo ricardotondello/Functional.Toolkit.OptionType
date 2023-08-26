@@ -1,8 +1,8 @@
 # 🚀 Functional.Toolkit.OptionType
 
 [![Build](https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/ricardotondello/Functional.Toolkit.OptionType/actions/workflows/dotnet.yml)
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=awesome-ric_functional-toolkit-optiontype&metric=alert_status)](https://sonarcloud.io/dashboard?id=awesome-ric_functional-toolkit-optiontype)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=awesome-ric_functional-toolkit-optiontype&metric=coverage)](https://sonarcloud.io/component_measures?id=awesome-ric_functional-toolkit-optiontype&metric=coverage)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=ricardotondello_Functional.Toolkit.OptionType&metric=alert_status)](https://sonarcloud.io/dashboard?id=ricardotondello_Functional.Toolkit.OptionType)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ricardotondello_Functional.Toolkit.OptionType&metric=coverage)](https://sonarcloud.io/component_measures?id=ricardotondello_Functional.Toolkit.OptionType&metric=coverage)
 [![NuGet latest version](https://badgen.net/nuget/v/Functional.Toolkit.OptionType/latest)](https://nuget.org/packages/Functional.Toolkit.OptionType)
 [![NuGet downloads](https://img.shields.io/nuget/dt/Functional.Toolkit.OptionType)](https://www.nuget.org/packages/Functional.Toolkit.OptionType)
 
