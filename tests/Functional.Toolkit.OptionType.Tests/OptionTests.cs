@@ -129,6 +129,29 @@ public class OptionTests
     }
     
     [Test]
+    public void Equal_ShouldReturnFalseWhenIsTheDifferentValue()
+    {
+        // Act
+        var option1 = Option.From(1);
+        var option2 = Option.From(2);
+        
+        // Assert
+        option1.Equals(option2).Should().BeFalse();
+    }
+    
+    [Test]
+    public void Equal_ShouldReturnFalseWhenOneOfResultsDoesntHaveValue()
+    {
+        // Act
+        var option1 = Option.From(1);
+        var option2 = Option.None<int>();
+        
+        // Assert
+        option1.Equals(option2).Should().BeFalse();
+        option2.Equals(option1).Should().BeFalse();
+    }
+    
+    [Test]
     public void Equal_ShouldReturnTrueWhenIsNone()
     {
         // Act
@@ -169,6 +192,27 @@ public class OptionTests
         
         // Assert
         option1.Equals(null).Should().BeFalse();
+    }
+    
+    [Test]
+    public void Equal_ShouldReturnTrueWhenUsingObjectEqualOperator()
+    {
+        // Act
+        var option1 = Option.From(1);
+        
+        // Assert
+        option1.Equals((object)Option.From(1)).Should().BeTrue();
+    }
+    
+    [Test]
+    public void Equal_ShouldReturnFalseWhenUsingObjectEqualOperator()
+    {
+        // Act
+        var option1 = Option.From(1);
+        
+        // Assert
+        // ReSharper disable once SuspiciousTypeConversion.Global
+        option1.Equals((object)2).Should().BeFalse();
     }
     
     [Test]
