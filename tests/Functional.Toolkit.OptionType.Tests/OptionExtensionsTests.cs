@@ -4,7 +4,7 @@ namespace Functional.Toolkit.OptionType.Tests;
 
 public class OptionExtensionsTests
 {
-    [Test]
+    [Fact]
     public void Should_ReturnValue_WhenValueExists()
     {
         var option = Option.Some(new OptionTestStruct());
@@ -13,7 +13,7 @@ public class OptionExtensionsTests
         result.Should().NotBeNull();
     }
 
-    [Test]
+    [Fact]
     public void Should_ReturnNull_WhenValueDoesntExists()
     {
         var option = Option.None<OptionTestStruct>();
@@ -22,7 +22,7 @@ public class OptionExtensionsTests
         result.Should().BeNull();
     }
 
-    [Test]
+    [Fact]
     public void Should_ExecuteActionWhenSome_WhenHasValue()
     {
         var option = Option.Some(true);
@@ -34,7 +34,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void Should_NotExecuteActionWhenSome_WhenIsNone()
     {
         var option = Option.None<bool>();
@@ -46,7 +46,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void Should_NotExecuteActionWhenNone_WhenHasValue()
     {
         var option = Option.Some(true);
@@ -58,7 +58,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void Should_ExecuteActionWhenNone_WhenIsNone()
     {
         var option = Option.None<bool>();
@@ -70,7 +70,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_ExecuteFuncAsyncWhenSome_WhenHasValue()
     {
         var option = Option.Some(true);
@@ -81,7 +81,7 @@ public class OptionExtensionsTests
         result.Value.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_NotExecuteFuncAsyncWhenSome_WhenIsNone()
     {
         var option = Option.None<bool>();
@@ -91,7 +91,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_NotExecuteFuncAsyncWhenNone_WhenHasValue()
     {
         var option = Option.Some(true);
@@ -110,7 +110,7 @@ public class OptionExtensionsTests
         placeHolder.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_ExecuteFuncAsyncWhenNone_WhenIsNone()
     {
         var option = Option.None<bool>();
@@ -128,7 +128,7 @@ public class OptionExtensionsTests
         placeHolder.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void Should_ExecuteActionWhenAny_WhenHasValue()
     {
         var option = Option.Some(true);
@@ -141,7 +141,7 @@ public class OptionExtensionsTests
         placeHolder.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void Should_ExecuteActionWhenAny_WhenIsNone()
     {
         var option = Option.None<bool>();
@@ -154,7 +154,7 @@ public class OptionExtensionsTests
         placeHolder.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_ExecuteActionWhenSomeAsync_WhenHasValue()
     {
         var option = Task.FromResult(Option.Some(true));
@@ -172,7 +172,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_NotExecuteActionWhenSomeAsync_WhenIsNone()
     {
         var option = Task.FromResult(Option.None<bool>());
@@ -190,7 +190,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_NotExecuteActionWhenNoneAsync_WhenHasValue()
     {
         var option = Task.FromResult(Option.Some(true));
@@ -208,7 +208,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_ExecuteActionWhenNoneAsync_WhenIsNone()
     {
         var option = Task.FromResult(Option.None<bool>());
@@ -226,7 +226,7 @@ public class OptionExtensionsTests
         result.HasValue.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_ExecuteActionWhenAnyAsync_WhenHasValue()
     {
         var option = Task.FromResult(Option.Some(true));
@@ -239,7 +239,7 @@ public class OptionExtensionsTests
         placeHolder.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public async Task Should_ExecuteActionWhenAnyAsync_WhenIsNone()
     {
         var option = Task.FromResult(Option.None<bool>());
@@ -252,7 +252,7 @@ public class OptionExtensionsTests
         placeHolder.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void OnSome_Should_Call_Function_If_Option_Has_Value()
     {
         // Arrange
@@ -266,7 +266,7 @@ public class OptionExtensionsTests
         result.Should().Be(Option.Some("HELLO"));
     }
 
-    [Test]
+    [Fact]
     public void OnSome_Should_Return_Option_If_Option_Is_None()
     {
         // Arrange
@@ -280,7 +280,7 @@ public class OptionExtensionsTests
         result.Should().Be(Option.None<string>());
     }
 
-    [Test]
+    [Fact]
     public void OnNone_Should_Call_Function_If_Option_Is_None()
     {
         // Arrange
@@ -294,7 +294,7 @@ public class OptionExtensionsTests
         result.Should().Be(Option.Some("hello"));
     }
 
-    [Test]
+    [Fact]
     public void OnNone_Should_Return_Option_If_Option_Has_Value()
     {
         // Arrange
@@ -308,7 +308,7 @@ public class OptionExtensionsTests
         result.Should().Be(Option.Some("hello"));
     }
 
-    [Test]
+    [Fact]
     public void OnAny_Should_Call_Function()
     {
         // Arrange
@@ -322,7 +322,7 @@ public class OptionExtensionsTests
         result.Should().Be(Option.Some("world"));
     }
 
-    [Test]
+    [Fact]
     public void OnAny_Should_Return_Option()
     {
         // Arrange
@@ -336,7 +336,7 @@ public class OptionExtensionsTests
         result.Should().Be(Option.None<string>());
     }
 
-    [Test]
+    [Fact]
     public async Task OnSome_WhenOptionHasValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -349,7 +349,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(2));
     }
 
-    [Test]
+    [Fact]
     public async Task OnSome_WhenOptionHasNoValue_ShouldReturnNone()
     {
         // Arrange
@@ -362,7 +362,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.None<int>());
     }
 
-    [Test]
+    [Fact]
     public async Task OnNone_WhenOptionHasNoValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -375,7 +375,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(1));
     }
 
-    [Test]
+    [Fact]
     public async Task OnNone_WhenOptionHasValue_ShouldReturnOption()
     {
         // Arrange
@@ -388,7 +388,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(option);
     }
 
-    [Test]
+    [Fact]
     public void OnAny_WhenOptionHasNoValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -401,7 +401,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.None<int>());
     }
 
-    [Test]
+    [Fact]
     public void OnAny_WhenOptionHasValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -414,7 +414,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(2));
     }
 
-    [Test]
+    [Fact]
     public async Task OnSomeAsync_WhenOptionHasValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -427,7 +427,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(2));
     }
 
-    [Test]
+    [Fact]
     public async Task OnSomeAsync_WhenOptionHasNoValue_ShouldReturnOptionNone()
     {
         // Arrange
@@ -440,7 +440,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.None<int>());
     }
 
-    [Test]
+    [Fact]
     public async Task OnNoneAsync_WhenOptionHasNoValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -453,7 +453,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(1));
     }
 
-    [Test]
+    [Fact]
     public async Task OnNoneAsync_WhenOptionHasValue_ShouldReturnOptionNone()
     {
         // Arrange
@@ -466,7 +466,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(1));
     }
 
-    [Test]
+    [Fact]
     public async Task OnAnyAsync_WhenOptionHasValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -479,7 +479,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(2));
     }
 
-    [Test]
+    [Fact]
     public async Task OnAnyAsync_WhenOptionHasNoValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -492,7 +492,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(1));
     }
 
-    [Test]
+    [Fact]
     public async Task MapAsync_WhenOptionHasValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -505,7 +505,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(2));
     }
 
-    [Test]
+    [Fact]
     public async Task MapAsync_WhenOptionHasNoValue_ShouldReturnOptionNone()
     {
         // Arrange
@@ -518,7 +518,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.None<int>());
     }
 
-    [Test]
+    [Fact]
     public async Task OnSomeAsyncTask_WhenOptionHasValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -531,7 +531,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(2));
     }
 
-    [Test]
+    [Fact]
     public async Task OnSomeAsyncTask_WhenOptionHasNoValue_ShouldReturnOptionNone()
     {
         // Arrange
@@ -544,7 +544,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.None<int>());
     }
 
-    [Test]
+    [Fact]
     public async Task OnNoneAsyncTask_WhenOptionHasNoValue_ShouldReturnResultOfFunction()
     {
         // Arrange
@@ -557,7 +557,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(1));
     }
 
-    [Test]
+    [Fact]
     public async Task OnNoneAsyncTask_WhenOptionHasValue_ShouldReturnOptionNone()
     {
         // Arrange
@@ -570,7 +570,7 @@ public class OptionExtensionsTests
         result.Should().BeEquivalentTo(Option.Some(1));
     }
 
-    [Test]
+    [Fact]
     public void ValueOrDefault_Returns_Value_When_HasValue_True()
     {
         // Arrange
@@ -583,7 +583,7 @@ public class OptionExtensionsTests
         result.Should().Be(42);
     }
 
-    [Test]
+    [Fact]
     public void ValueOrDefault_Returns_Default_When_HasValue_False()
     {
         // Arrange
@@ -596,7 +596,7 @@ public class OptionExtensionsTests
         result.Should().Be(default(int));
     }
 
-    [Test]
+    [Fact]
     public void ValueOr_Returns_Value_When_HasValue_True()
     {
         // Arrange
@@ -609,7 +609,7 @@ public class OptionExtensionsTests
         result.Should().Be(42);
     }
 
-    [Test]
+    [Fact]
     public void ValueOr_Returns_Fallback_When_HasValue_False()
     {
         // Arrange

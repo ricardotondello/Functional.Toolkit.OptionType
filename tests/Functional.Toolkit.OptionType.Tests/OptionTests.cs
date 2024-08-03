@@ -2,11 +2,10 @@
 
 using System;
 using FluentAssertions;
-using NUnit.Framework;
 
 public class OptionTests
 {
-    [Test]
+    [Fact]
     public void Should_Return_OptionNone_If_Value_Is_Null()
     {
         // Act
@@ -26,7 +25,7 @@ public class OptionTests
         value2.Should().Throw<InvalidOperationException>();
     }
 
-    [Test]
+    [Fact]
     public void Should_Throw_If_Assigned_Value_Is_Null()
     {
         // Act
@@ -36,7 +35,7 @@ public class OptionTests
         act1.Should().Throw<ArgumentNullException>();
     }
 
-    [Test]
+    [Fact]
     public void Should_Return_OptionSome_If_Value_Is_Not_Null()
     {
         // Arrange
@@ -56,7 +55,7 @@ public class OptionTests
     }
 
 
-    [Test]
+    [Fact]
     public void Should_Return_BaseType_If_Value_Nullable_Struct()
     {
         // Arrange
@@ -76,11 +75,12 @@ public class OptionTests
         option2.Value.GetType().Should().Be<int>();
     }
 
-    [TestCase(false)]
-    [TestCase(true)]
-    [TestCase(12)]
-    [TestCase(123d)]
-    [TestCase("abc")]
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    [InlineData(12)]
+    [InlineData(123d)]
+    [InlineData("abc")]
     public void ImplicitConversion_GivenPrimitiveType_ThenExpectOptionValue<T>(T scenario)
     {
         // Act
@@ -91,7 +91,7 @@ public class OptionTests
         option.Value.Should().Be(scenario);
     }
 
-    [Test]
+    [Fact]
     public void ImplicitConversion_GivenNull_ThenExpectEmptyOption()
     {
         // Act
@@ -101,7 +101,7 @@ public class OptionTests
         option.HasValue.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void ToString_Should_Return_Correct_Result()
     {
         // Arrange
@@ -117,7 +117,7 @@ public class OptionTests
         option2.ToString().Should().Be("None<OptionTestClass>");
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnTrueWhenIsTheSameValue()
     {
         // Act
@@ -128,7 +128,7 @@ public class OptionTests
         option1.Equals(option2).Should().BeTrue();
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnFalseWhenIsTheDifferentValue()
     {
         // Act
@@ -139,7 +139,7 @@ public class OptionTests
         option1.Equals(option2).Should().BeFalse();
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnFalseWhenOneOfResultsDoesntHaveValue()
     {
         // Act
@@ -151,7 +151,7 @@ public class OptionTests
         option2.Equals(option1).Should().BeFalse();
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnTrueWhenIsNone()
     {
         // Act
@@ -162,7 +162,7 @@ public class OptionTests
         option1.Equals(option2).Should().BeTrue();
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnTrueWhenIsTheSameValueUsingEqualOperator()
     {
         // Act
@@ -173,7 +173,7 @@ public class OptionTests
         (option1==option2).Should().BeTrue();
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnTrueWhenIsDifferentValueUsingNotEqualOperator()
     {
         // Act
@@ -184,7 +184,7 @@ public class OptionTests
         (option1!=option2).Should().BeTrue();
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnFalseWhenIsNullUsingNotEqualOperator()
     {
         // Act
@@ -194,7 +194,7 @@ public class OptionTests
         option1.Equals(null).Should().BeFalse();
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnTrueWhenUsingObjectEqualOperator()
     {
         // Act
@@ -204,7 +204,7 @@ public class OptionTests
         option1.Equals((object)Option.From(1)).Should().BeTrue();
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnFalseWhenUsingObjectEqualOperator()
     {
         // Act
@@ -215,7 +215,7 @@ public class OptionTests
         option1.Equals((object)2).Should().BeFalse();
     }
     
-    [Test]
+    [Fact]
     public void Equal_ShouldReturnHasCode()
     {
         // Act
