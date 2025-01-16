@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace Functional.Toolkit.OptionType.Tests;
+﻿namespace Functional.Toolkit.OptionType.Tests;
 
 public class OptionExtensionsTests
 {
@@ -9,8 +7,8 @@ public class OptionExtensionsTests
     {
         var option = Option.Some(new OptionTestStruct());
         var result = option.ValueOrNull();
-        result.HasValue.Should().BeTrue();
-        result.Should().NotBeNull();
+        Assert.True(result.HasValue);
+        Assert.NotNull(result);
     }
 
     [Fact]
@@ -18,8 +16,9 @@ public class OptionExtensionsTests
     {
         var option = Option.None<OptionTestStruct>();
         var result = option.ValueOrNull();
-        result.HasValue.Should().BeFalse();
-        result.Should().BeNull();
+        Assert.False(result.HasValue);
+        // ReSharper disable once ExpressionIsAlwaysNull
+        Assert.Null(result);
     }
 
     [Fact]
@@ -30,8 +29,8 @@ public class OptionExtensionsTests
         void Act(bool value) => placeHolder = value;
         var result = option.WhenSome(Act);
 
-        placeHolder.Should().BeTrue();
-        result.HasValue.Should().BeTrue();
+        Assert.True(placeHolder);
+        Assert.True(result.HasValue);
     }
 
     [Fact]
@@ -42,8 +41,8 @@ public class OptionExtensionsTests
         void Act(bool value) => placeHolder = value;
         var result = option.WhenSome(Act);
 
-        placeHolder.Should().BeFalse();
-        result.HasValue.Should().BeFalse();
+        Assert.False(placeHolder);
+        Assert.False(result.HasValue);
     }
 
     [Fact]
@@ -54,8 +53,8 @@ public class OptionExtensionsTests
         var act = new Action(() => placeHolder = true);
         var result = option.WhenNone(act);
 
-        placeHolder.Should().BeFalse();
-        result.HasValue.Should().BeTrue();
+        Assert.False(placeHolder);
+        Assert.True(result.HasValue);
     }
 
     [Fact]
@@ -66,8 +65,8 @@ public class OptionExtensionsTests
         var act = new Action(() => placeHolder = true);
         var result = option.WhenNone(act);
 
-        placeHolder.Should().BeTrue();
-        result.HasValue.Should().BeFalse();
+        Assert.True(placeHolder);
+        Assert.False(result.HasValue);
     }
 
     [Fact]
@@ -77,8 +76,8 @@ public class OptionExtensionsTests
         Task Fn(bool value) => Task.FromResult(true);
         var result = await option.WhenSome(Fn);
 
-        result.HasValue.Should().BeTrue();
-        result.Value.Should().BeTrue();
+        Assert.True(result.HasValue);
+        Assert.True(result.Value);
     }
 
     [Fact]
@@ -88,7 +87,7 @@ public class OptionExtensionsTests
         Task Fn(bool value) => Task.FromResult(true);
         var result = await option.WhenSome(Fn);
 
-        result.HasValue.Should().BeFalse();
+        Assert.False(result.HasValue);
     }
 
     [Fact]
@@ -105,9 +104,9 @@ public class OptionExtensionsTests
 
         var result = await option.WhenNone(Fn);
 
-        result.HasValue.Should().BeTrue();
-        result.Value.Should().BeTrue();
-        placeHolder.Should().BeFalse();
+        Assert.True(result.HasValue);
+        Assert.True(result.Value);
+        Assert.False(placeHolder);
     }
 
     [Fact]
@@ -124,8 +123,8 @@ public class OptionExtensionsTests
 
         var result = await option.WhenNone(Fn);
 
-        result.HasValue.Should().BeFalse();
-        placeHolder.Should().BeTrue();
+        Assert.False(result.HasValue);
+        Assert.True(placeHolder);
     }
 
     [Fact]
@@ -137,8 +136,8 @@ public class OptionExtensionsTests
 
         var result = option.WhenAny(Act);
 
-        result.HasValue.Should().BeTrue();
-        placeHolder.Should().BeTrue();
+        Assert.True(result.HasValue);
+        Assert.True(placeHolder);
     }
 
     [Fact]
@@ -150,8 +149,8 @@ public class OptionExtensionsTests
 
         var result = option.WhenAny(Act);
 
-        result.HasValue.Should().BeFalse();
-        placeHolder.Should().BeTrue();
+        Assert.False(result.HasValue);
+        Assert.True(placeHolder);
     }
 
     [Fact]
@@ -168,8 +167,8 @@ public class OptionExtensionsTests
 
         var result = await option.WhenSomeAsync(Fn);
 
-        placeHolder.Should().BeTrue();
-        result.HasValue.Should().BeTrue();
+        Assert.True(placeHolder);
+        Assert.True(result.HasValue);
     }
 
     [Fact]
@@ -186,8 +185,8 @@ public class OptionExtensionsTests
 
         var result = await option.WhenSomeAsync(Fn);
 
-        placeHolder.Should().BeFalse();
-        result.HasValue.Should().BeFalse();
+        Assert.False(placeHolder);
+        Assert.False(result.HasValue);
     }
 
     [Fact]
@@ -204,8 +203,8 @@ public class OptionExtensionsTests
 
         var result = await option.WhenNoneAsync(Fn);
 
-        placeHolder.Should().BeFalse();
-        result.HasValue.Should().BeTrue();
+        Assert.False(placeHolder);
+        Assert.True(result.HasValue);
     }
 
     [Fact]
@@ -222,8 +221,8 @@ public class OptionExtensionsTests
 
         var result = await option.WhenNoneAsync(Fn);
 
-        placeHolder.Should().BeTrue();
-        result.HasValue.Should().BeFalse();
+        Assert.True(placeHolder);
+        Assert.False(result.HasValue);
     }
 
     [Fact]
@@ -235,8 +234,8 @@ public class OptionExtensionsTests
 
         var result = await option.WhenAnyAsync(Act);
 
-        result.HasValue.Should().BeTrue();
-        placeHolder.Should().BeTrue();
+        Assert.True(result.HasValue);
+        Assert.True(placeHolder);
     }
 
     [Fact]
@@ -248,8 +247,8 @@ public class OptionExtensionsTests
 
         var result = await option.WhenAnyAsync(Act);
 
-        result.HasValue.Should().BeFalse();
-        placeHolder.Should().BeTrue();
+        Assert.False(result.HasValue);
+        Assert.True(placeHolder);
     }
 
     [Fact]
@@ -263,7 +262,7 @@ public class OptionExtensionsTests
         var result = option.OnSome(Fn);
 
         // Assert
-        result.Should().Be(Option.Some("HELLO"));
+        Assert.Equal(Option.Some("HELLO"), result);
     }
 
     [Fact]
@@ -277,7 +276,7 @@ public class OptionExtensionsTests
         var result = option.OnSome(Fn);
 
         // Assert
-        result.Should().Be(Option.None<string>());
+        Assert.Equal(Option.None<string>(), result);
     }
 
     [Fact]
@@ -291,7 +290,7 @@ public class OptionExtensionsTests
         var result = option.OnNone(Fn);
 
         // Assert
-        result.Should().Be(Option.Some("hello"));
+        Assert.Equal(Option.Some("hello"), result);
     }
 
     [Fact]
@@ -305,7 +304,7 @@ public class OptionExtensionsTests
         var result = option.OnNone(Fn);
 
         // Assert
-        result.Should().Be(Option.Some("hello"));
+        Assert.Equal(Option.Some("hello"), result);
     }
 
     [Fact]
@@ -319,7 +318,7 @@ public class OptionExtensionsTests
         var result = option.OnAny(Fn);
 
         // Assert
-        result.Should().Be(Option.Some("world"));
+        Assert.Equal(Option.Some("world"), result);
     }
 
     [Fact]
@@ -333,7 +332,7 @@ public class OptionExtensionsTests
         var result = option.OnAny(Fn);
 
         // Assert
-        result.Should().Be(Option.None<string>());
+        Assert.Equal(Option.None<string>(), result);
     }
 
     [Fact]
@@ -346,7 +345,7 @@ public class OptionExtensionsTests
         var result = await option.OnSome(async x => await Task.FromResult(Option.Some(x + 1)));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(2));
+        Assert.Equivalent(Option.Some(2), result);
     }
 
     [Fact]
@@ -359,7 +358,7 @@ public class OptionExtensionsTests
         var result = await option.OnSome(async x => await Task.FromResult(Option.Some(x + 1)));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.None<int>());
+        Assert.Equal(Option.None<int>(), result);
     }
 
     [Fact]
@@ -372,7 +371,7 @@ public class OptionExtensionsTests
         var result = await option.OnNone(async () => await Task.FromResult(Option.Some(1)));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(1));
+        Assert.Equivalent(Option.Some(1), result);
     }
 
     [Fact]
@@ -385,7 +384,7 @@ public class OptionExtensionsTests
         var result = await option.OnNone(async () => await Task.FromResult(Option.Some(2)));
 
         // Assert
-        result.Should().BeEquivalentTo(option);
+        Assert.Equivalent(option, result);
     }
 
     [Fact]
@@ -398,7 +397,7 @@ public class OptionExtensionsTests
         var result = option.OnAny(opt => opt.Map(x => x + 1));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.None<int>());
+        Assert.Equal(Option.None<int>(), result);
     }
 
     [Fact]
@@ -411,7 +410,7 @@ public class OptionExtensionsTests
         var result = option.OnAny(opt => opt.Map(x => x + 1));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(2));
+        Assert.Equivalent(Option.Some(2), result);
     }
 
     [Fact]
@@ -424,7 +423,7 @@ public class OptionExtensionsTests
         var result = await option.OnSomeAsync(async opt => await Task.FromResult(opt + 1));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(2));
+        Assert.Equivalent(Option.Some(2), result);
     }
 
     [Fact]
@@ -437,7 +436,7 @@ public class OptionExtensionsTests
         var result = await option.OnSomeAsync(async opt => await Task.FromResult(opt + 1));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.None<int>());
+        Assert.Equal(Option.None<int>(), result);
     }
 
     [Fact]
@@ -450,7 +449,7 @@ public class OptionExtensionsTests
         var result = await option.OnNoneAsync(async () => await Task.FromResult(Option.Some(1)));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(1));
+        Assert.Equivalent(Option.Some(1), result);
     }
 
     [Fact]
@@ -463,7 +462,7 @@ public class OptionExtensionsTests
         var result = await option.OnNoneAsync(async () => await Task.FromResult(Option.Some(2)));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(1));
+        Assert.Equivalent(Option.Some(1), result);
     }
 
     [Fact]
@@ -476,7 +475,7 @@ public class OptionExtensionsTests
         var result = await option.OnAnyAsync(opt => opt.Map(x => x + 1));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(2));
+        Assert.Equivalent(Option.Some(2), result);
     }
 
     [Fact]
@@ -489,7 +488,7 @@ public class OptionExtensionsTests
         var result = await option.OnAnyAsync(async () => await Task.FromResult(Option.Some(1)));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(1));
+        Assert.Equivalent(Option.Some(1), result);
     }
 
     [Fact]
@@ -502,7 +501,7 @@ public class OptionExtensionsTests
         var result = await option.MapAsync(x => x + 1);
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(2));
+        Assert.Equivalent(Option.Some(2), result);
     }
 
     [Fact]
@@ -515,7 +514,7 @@ public class OptionExtensionsTests
         var result = await option.MapAsync(x => x + 1);
 
         // Assert
-        result.Should().BeEquivalentTo(Option.None<int>());
+        Assert.Equal(Option.None<int>(), result);
     }
 
     [Fact]
@@ -528,7 +527,7 @@ public class OptionExtensionsTests
         var result = await option.OnSomeAsync(x => Option.Some(x + 1));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(2));
+        Assert.Equivalent(Option.Some(2), result);
     }
 
     [Fact]
@@ -541,7 +540,7 @@ public class OptionExtensionsTests
         var result = await option.OnSomeAsync(x => Option.Some(x + 1));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.None<int>());
+        Assert.Equal(Option.None<int>(), result);
     }
 
     [Fact]
@@ -554,7 +553,7 @@ public class OptionExtensionsTests
         var result = await option.OnNoneAsync(() => Option.Some(1));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(1));
+        Assert.Equivalent(Option.Some(1), result);
     }
 
     [Fact]
@@ -567,7 +566,7 @@ public class OptionExtensionsTests
         var result = await option.OnNoneAsync(() => Option.Some(2));
 
         // Assert
-        result.Should().BeEquivalentTo(Option.Some(1));
+        Assert.Equivalent(Option.Some(1), result);
     }
 
     [Fact]
@@ -580,7 +579,7 @@ public class OptionExtensionsTests
         var result = option.ValueOrDefault();
 
         // Assert
-        result.Should().Be(42);
+        Assert.Equal(42, result);
     }
 
     [Fact]
@@ -593,7 +592,7 @@ public class OptionExtensionsTests
         var result = option.ValueOrDefault();
 
         // Assert
-        result.Should().Be(default(int));
+        Assert.Equal(0, result);
     }
 
     [Fact]
@@ -606,7 +605,7 @@ public class OptionExtensionsTests
         var result = option.ValueOr(0);
 
         // Assert
-        result.Should().Be(42);
+        Assert.Equal(42, result);
     }
 
     [Fact]
@@ -619,6 +618,6 @@ public class OptionExtensionsTests
         var result = option.ValueOr(0);
 
         // Assert
-        result.Should().Be(0);
+        Assert.Equal(0, result);
     }
 }
