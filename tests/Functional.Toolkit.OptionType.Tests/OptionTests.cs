@@ -1,7 +1,6 @@
 ﻿namespace Functional.Toolkit.OptionType.Tests;
 
 using System;
-using FluentAssertions;
 
 public class OptionTests
 {
@@ -10,29 +9,24 @@ public class OptionTests
     {
         // Act
         var option1 = Option.From((OptionTestClass)null);
-        var value1 = () => option1.Value;
-
         var option2 = Option.From((OptionTestStruct?)null);
-        Func<OptionTestStruct?> value2 = () => option2.Value;
 
         // Assert
-        option1.HasValue.Should().BeFalse();
-        option1.Should().Be(Option.None<OptionTestClass>());
-        value1.Should().Throw<InvalidOperationException>();
+        Assert.False(option1.HasValue);
+        Assert.Equal(Option.None<OptionTestClass>(), option1);
+        Assert.Throws<InvalidOperationException>(() => option1.Value);
 
-        option2.HasValue.Should().BeFalse();
-        option2.Should().Be(Option.None<OptionTestStruct>());
-        value2.Should().Throw<InvalidOperationException>();
+        Assert.False(option2.HasValue);
+        Assert.Equal(Option.None<OptionTestStruct>(), option2);
+        Assert.Throws<InvalidOperationException>(() => option2.Value);
     }
 
     [Fact]
     public void Should_Throw_If_Assigned_Value_Is_Null()
     {
         // Act
-        Action act1 = () => Option.Some<OptionTestClass>(null);
-
         // Assert
-        act1.Should().Throw<ArgumentNullException>();
+        Assert.Throws<ArgumentNullException>(() => Option.Some<OptionTestClass>(null));
     }
 
     [Fact]
@@ -47,11 +41,11 @@ public class OptionTests
         var option2 = Option.From(obj2);
 
         // Assert
-        option1.HasValue.Should().BeTrue();
-        option1.Value.Should().Be(obj1);
+        Assert.True(option1.HasValue);
+        Assert.Equal(obj1, option1.Value);
 
-        option2.HasValue.Should().BeTrue();
-        option2.Value.Should().Be(obj2);
+        Assert.True(option2.HasValue);
+        Assert.Equal(obj2, option2.Value);
     }
 
 
@@ -66,13 +60,13 @@ public class OptionTests
         var option2 = Option.From(nullableInt2);
 
         // Assert
-        option1.HasValue.Should().BeFalse();
-        option1.IsNone.Should().BeTrue();
-        option1.GetType().GenericTypeArguments[0].Should().Be<int>();
+        Assert.False(option1.HasValue);
+        Assert.True(option1.IsNone);
+        Assert.IsType<Option<int>>(option1);
 
-        option2.HasValue.Should().BeTrue();
-        option2.Value.Should().Be(nullableInt2.Value);
-        option2.Value.GetType().Should().Be<int>();
+        Assert.True(option2.HasValue);
+        Assert.Equal(nullableInt2.Value, option2.Value);
+        Assert.IsType<int>(option2.Value);
     }
 
     [Theory]
@@ -87,8 +81,8 @@ public class OptionTests
         Option<T> option = scenario;
 
         // Assert
-        option.HasValue.Should().BeTrue();
-        option.Value.Should().Be(scenario);
+        Assert.True(option.HasValue);
+        Assert.Equal(scenario, option.Value);
     }
 
     [Fact]
@@ -98,14 +92,14 @@ public class OptionTests
         Option<string> option = null;
 
         // Assert
-        option.HasValue.Should().BeFalse();
+        Assert.False(option.HasValue);
     }
 
     [Fact]
     public void ToString_Should_Return_Correct_Result()
     {
         // Arrange
-        OptionTestClass obj1 = new OptionTestClass();
+        var obj1 = new OptionTestClass();
 
         // Act
         var option1 = Option.From(obj1);
@@ -113,115 +107,115 @@ public class OptionTests
 
 
         // Assert
-        option1.ToString().Should().Be("Some<OptionTestClass>(OptionTestClass)");
-        option2.ToString().Should().Be("None<OptionTestClass>");
+        Assert.Equal("Some<OptionTestClass>(OptionTestClass)", option1.ToString());
+        Assert.Equal("None<OptionTestClass>", option2.ToString());
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnTrueWhenIsTheSameValue()
     {
         // Act
         var option1 = Option.From(1);
         var option2 = Option.From(1);
-        
+
         // Assert
-        option1.Equals(option2).Should().BeTrue();
+        Assert.True(option1.Equals(option2));
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnFalseWhenIsTheDifferentValue()
     {
         // Act
         var option1 = Option.From(1);
         var option2 = Option.From(2);
-        
+
         // Assert
-        option1.Equals(option2).Should().BeFalse();
+        Assert.False(option1.Equals(option2));
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnFalseWhenOneOfResultsDoesntHaveValue()
     {
         // Act
         var option1 = Option.From(1);
         var option2 = Option.None<int>();
-        
+
         // Assert
-        option1.Equals(option2).Should().BeFalse();
-        option2.Equals(option1).Should().BeFalse();
+        Assert.False(option1.Equals(option2));
+        Assert.False(option2.Equals(option1));
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnTrueWhenIsNone()
     {
         // Act
         var option1 = Option.None<int>();
         var option2 = Option.None<int>();
-        
+
         // Assert
-        option1.Equals(option2).Should().BeTrue();
+        Assert.True(option1.Equals(option2));
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnTrueWhenIsTheSameValueUsingEqualOperator()
     {
         // Act
         var option1 = Option.From(1);
         var option2 = Option.From(1);
-        
+
         // Assert
-        (option1==option2).Should().BeTrue();
+        Assert.True(option1 == option2);
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnTrueWhenIsDifferentValueUsingNotEqualOperator()
     {
         // Act
         var option1 = Option.From(1);
         var option2 = Option.From(2);
-        
+
         // Assert
-        (option1!=option2).Should().BeTrue();
+        Assert.True(option1 != option2);
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnFalseWhenIsNullUsingNotEqualOperator()
     {
         // Act
         var option1 = Option.From(1);
-        
+
         // Assert
-        option1.Equals(null).Should().BeFalse();
+        Assert.False(option1.Equals(null));
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnTrueWhenUsingObjectEqualOperator()
     {
         // Act
         var option1 = Option.From(1);
-        
+
         // Assert
-        option1.Equals((object)Option.From(1)).Should().BeTrue();
+        Assert.True(option1.Equals((object)Option.From(1)));
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnFalseWhenUsingObjectEqualOperator()
     {
         // Act
         var option1 = Option.From(1);
-        
+
         // Assert
         // ReSharper disable once SuspiciousTypeConversion.Global
-        option1.Equals((object)2).Should().BeFalse();
+        Assert.False(option1.Equals((object)2));
     }
-    
+
     [Fact]
     public void Equal_ShouldReturnHasCode()
     {
         // Act
         var option1 = Option.From(1);
-        
+
         // Assert
-        option1.GetHashCode().Should().BeGreaterThan(0);
+        Assert.True(option1.GetHashCode() > 0);
     }
 }
