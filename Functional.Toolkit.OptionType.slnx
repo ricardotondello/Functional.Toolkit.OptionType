@@ -1,4 +1,8 @@
 <Solution>
-  <Project Path="src/Functional.Toolkit.OptionType/Functional.Toolkit.OptionType.csproj" />
-  <Project Path="tests/Functional.Toolkit.OptionType.Tests/Functional.Toolkit.OptionType.Tests.csproj" />
+  <Folder Name="/src/">
+    <Project Path="src/Functional.Toolkit.OptionType/Functional.Toolkit.OptionType.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Functional.Toolkit.OptionType.Tests/Functional.Toolkit.OptionType.Tests.csproj" />
+  </Folder>
 </Solution>
